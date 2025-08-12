@@ -3,55 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Nota</title>
+    <title>CELRS 2025</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #004aad, #0fbcf9);
+            color: #fff;
             text-align: center;
             padding: 30px;
         }
         .container {
-            background: white;
-            max-width: 400px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            max-width: 450px;
             margin: auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px #ccc;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.3);
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 16px;
         }
         input {
-            padding: 8px;
-            margin: 10px;
-            width: 80%;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        button {
             padding: 10px;
-            background: #28a745;
-            color: white;
+            margin-top: 5px;
+            width: 80%;
+            border-radius: 8px;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #218838;
+            outline: none;
+            font-size: 16px;
+            text-align: center;
         }
         .resultado {
-            margin-top: 20px;
-            font-size: 20px;
+            margin-top: 25px;
+            font-size: 22px;
             font-weight: bold;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255,255,255,0.2);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Calculadora de Nota</h2>
-        <input type="number" id="valorProva" placeholder="Valor total da prova" step="0.01">
-        <input type="number" id="totalQuestoes" placeholder="Número total de questões">
-        <input type="number" id="acertos" placeholder="Número de acertos">
-        <button onclick="calcularNota()">Calcular</button>
-        <div class="resultado" id="resultado"></div>
+        <h1>CELRS 2025</h1>
+
+        <label for="valorProva">Valor total da prova</label>
+        <input type="number" id="valorProva" placeholder="Ex: 10" step="0.01">
+
+        <label for="totalQuestoes">Número total de questões</label>
+        <input type="number" id="totalQuestoes" placeholder="Ex: 20">
+
+        <label for="acertos">Número de acertos</label>
+        <input type="number" id="acertos" placeholder="Ex: 15">
+
+        <div class="resultado" id="resultado">Digite os dados para ver a nota...</div>
     </div>
 
     <script>
@@ -61,7 +76,7 @@
             const acertos = parseInt(document.getElementById("acertos").value);
 
             if (isNaN(valorProva) || isNaN(totalQuestoes) || isNaN(acertos) || totalQuestoes <= 0) {
-                document.getElementById("resultado").innerText = "Preencha todos os campos corretamente!";
+                document.getElementById("resultado").innerText = "Digite os dados para ver a nota...";
                 return;
             }
 
@@ -70,6 +85,10 @@
 
             document.getElementById("resultado").innerText = `Você fez ${pontos.toFixed(2)} pontos`;
         }
+
+        document.querySelectorAll("input").forEach(input => {
+            input.addEventListener("input", calcularNota);
+        });
     </script>
 </body>
 </html>
