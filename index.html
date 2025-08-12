@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Nota</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 30px;
+        }
+        .container {
+            background: white;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px #ccc;
+        }
+        input {
+            padding: 8px;
+            margin: 10px;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .resultado {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora de Nota</h2>
+        <input type="number" id="valorProva" placeholder="Valor total da prova" step="0.01">
+        <input type="number" id="totalQuestoes" placeholder="Número total de questões">
+        <input type="number" id="acertos" placeholder="Número de acertos">
+        <button onclick="calcularNota()">Calcular</button>
+        <div class="resultado" id="resultado"></div>
+    </div>
+
+    <script>
+        function calcularNota() {
+            const valorProva = parseFloat(document.getElementById("valorProva").value);
+            const totalQuestoes = parseInt(document.getElementById("totalQuestoes").value);
+            const acertos = parseInt(document.getElementById("acertos").value);
+
+            if (isNaN(valorProva) || isNaN(totalQuestoes) || isNaN(acertos) || totalQuestoes <= 0) {
+                document.getElementById("resultado").innerText = "Preencha todos os campos corretamente!";
+                return;
+            }
+
+            const valorPorQuestao = valorProva / totalQuestoes;
+            const pontos = valorPorQuestao * acertos;
+
+            document.getElementById("resultado").innerText = `Você fez ${pontos.toFixed(2)} pontos`;
+        }
+    </script>
+</body>
+</html>
